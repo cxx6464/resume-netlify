@@ -50,9 +50,9 @@ export default {
 
     const saveResume = async () => {
       try {
-        await axios.post("/.netlify/functions/api/save", resumeData.value);
+        await axios.post("/.netlify/functions/save", resumeData.value);
         // 修改为本地API地址
-        // await axios.post("http://localhost:3000/api/save", resumeData.value);
+        // await axios.post("http://localhost:3000/save", resumeData.value);
         alert("简历保存成功！");
       } catch (error) {
         console.error("保存失败:", error);
