@@ -8,8 +8,20 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB 连接
-mongoose.connect(process.env.MONGODB_URI);
-
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    ssl: true, // 显式启用 SSL
+    serverSelectionTimeoutMS: 5000, // 5 秒内无响应则报错
+    socketTimeoutMS: 45000, // 防止长时间无响应卡死
+  })
+  .then(() => console.log("MongoDB 连接成功"))
+  .catch((err) => {
+    console.error("MongoDB 连接失败:", err.message);
+    // 记录完整的错误堆栈
+    console.error(err.stack);
+  });
 const resumeSchema = new mongoose.Schema({
   personalInfo: Object,
   education: Array,
