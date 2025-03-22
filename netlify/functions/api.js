@@ -8,11 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB 连接
-mongoose.connect(process.env.MONGODB_URI, {
-  // mongoose.connect("mongodb://127.0.0.1:27017/resume-builder", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(process.env.MONGODB_URI);
 
 const resumeSchema = new mongoose.Schema({
   personalInfo: Object,
